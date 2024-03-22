@@ -129,7 +129,7 @@ const productSchema = new mongoose.Schema(
     salesPreference: {
       type: String,
       default: "retail",
-      enum: ["retail", "wholesale", "derica", "paint"],
+      enum: ["retail", "wholesale", "derica", "paint", "community"],
     },
 
     allowSubscription: {
