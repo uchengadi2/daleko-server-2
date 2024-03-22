@@ -55,6 +55,8 @@ const couponRoute = require("./routes/couponRoute");
 const carrierRoute = require("./routes/carrierRoute");
 const quoteRoute = require("./routes/requestQuoteRoute");
 const freezePriceRoute = require("./routes/freezePriceRoute");
+const rejectsRoute = require("./routes/rejectsRoute");
+const packagingRoute = require("./routes/packagingRoute");
 
 const app = express();
 
@@ -167,6 +169,8 @@ app.use("/api/v1/coupons", couponRoute);
 app.use("/api/v1/carriers", carrierRoute);
 app.use("/api/v1/quotes", quoteRoute);
 app.use("/api/v1/freezes", freezePriceRoute);
+app.use("/api/v1/rejects", rejectsRoute);
+app.use("/api/v1/packagings", packagingRoute);
 
 //tackling unhandled routes
 app.all("*", (req, res, next) => {

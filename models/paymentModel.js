@@ -62,11 +62,11 @@ const paymentSchema = new mongoose.Schema(
     paymentDate: {
       type: Date,
     },
-    remittanceStatus: {
-      type: String,
-      enum: ["pending-or-partial", "full"],
-      default: "pending-or-partial",
-    },
+    // remittanceStatus: {
+    //   type: String,
+    //   enum: ["pending-or-partial", "full"],
+    //   default: "pending-or-partial",
+    // },
     totalSumRemitted: {
       type: Number,
       default: 0,

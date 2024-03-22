@@ -170,7 +170,21 @@ const orderSchema = new mongoose.Schema(
     shopType: {
       type: String,
       default: "online",
-      enum: ["online", "onsite", "offsite"],
+      enum: ["online", "onsite"],
+    },
+
+    stockAvailabilityStatus: {
+      type: String,
+      default: "not-processed",
+      enum: ["not-processed", "in-stock", "out-of-stock", "incomplete-stock"],
+    },
+    availabilityComment: {
+      type: String,
+    },
+    packagingReadinessStatus: {
+      type: String,
+      default: "pending",
+      enum: ["pending", "ready", "not-ready"],
     },
   },
   {
