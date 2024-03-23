@@ -50,9 +50,7 @@ const orderSchema = new mongoose.Schema(
     customerEmailAddress: {
       type: String,
     },
-    customerEmailAddress: {
-      type: String,
-    },
+
     recipientName: {
       type: String,
     },
@@ -201,6 +199,10 @@ orderSchema.pre(/^find/, function (next) {
   this.populate({
     path: "transactionId",
   });
+  this.populate({
+    path: "currency",
+  });
+
   next();
 });
 

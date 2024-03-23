@@ -32,22 +32,22 @@ const inventorySchema = new mongoose.Schema(
     unit: {
       type: String,
     },
-    pricePerUnit: {
-      type: Number,
-    },
+    // pricePerUnit: {
+    //   type: Number,
+    // },
 
-    minQuantity: {
-      type: Number,
-      default: 1,
-    },
+    // minQuantity: {
+    //   type: Number,
+    //   default: 1,
+    // },
     isOnPromo: {
       type: String,
       default: "no",
       enum: ["no", "yes"],
     },
-    promoPrice: {
-      type: Number,
-    },
+    // promoPrice: {
+    //   type: Number,
+    // },
     totalCost: {
       type: Number,
     },
@@ -57,22 +57,11 @@ const inventorySchema = new mongoose.Schema(
     barcode: {
       type: String,
     },
-    previousDayPricePerUnit: {
-      type: Number,
-    },
-    currentPricePerUnit: {
-      type: Number,
-    },
+
     costPerUnit: {
       type: Number,
     },
-    priceSensitivity: {
-      type: String,
-      enum: ["normal", "volatile"],
-    },
-    deliveryCost: {
-      type: Number,
-    },
+
     source: {
       type: mongoose.Schema.ObjectId,
       ref: "Location",
@@ -114,11 +103,7 @@ const inventorySchema = new mongoose.Schema(
         type: String,
       },
     ],
-    displayOnStore: {
-      type: Boolean,
-      default: false,
-      enum: [false, true],
-    },
+
     dateOnBoarded: {
       type: Date,
     },
@@ -140,6 +125,11 @@ const inventorySchema = new mongoose.Schema(
         ref: "User",
       },
     ],
+    batchStatus: {
+      type: String,
+      default: "in-stock",
+      enum: ["empty", "in-stock"],
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -151,6 +141,10 @@ const inventorySchema = new mongoose.Schema(
 inventorySchema.pre(/^find/, function (next) {
   this.populate({
     path: "location",
+  });
+
+  this.populate({
+    path: "product",
   });
 
   next();

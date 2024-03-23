@@ -86,6 +86,24 @@ const requestQuoteSchema = new mongoose.Schema(
   }
 );
 
+//QUERY MIDDLEWARE
+requestQuoteSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "country",
+  });
+  this.populate({
+    path: "state",
+  });
+  this.populate({
+    path: "city",
+  });
+  this.populate({
+    path: "product",
+  });
+
+  next();
+});
+
 const RequestQuote = mongoose.model("RequestQuote", requestQuoteSchema);
 
 module.exports = RequestQuote;
