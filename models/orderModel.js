@@ -109,7 +109,16 @@ const orderSchema = new mongoose.Schema(
     paymentMethod: {
       type: String,
       default: "card",
-      enum: ["card", "payOnDelivery"],
+      enum: [
+        "card",
+        "payOnDelivery",
+        "cash",
+        "bank-transfer",
+        "on-credit",
+        "pos",
+        "wallet",
+        "ussd",
+      ],
     },
 
     salesTax: {

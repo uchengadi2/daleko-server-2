@@ -42,7 +42,16 @@ const transactionSchema = new mongoose.Schema(
     paymentMethod: {
       type: String,
       default: "card",
-      enum: ["card", "payOnDelivery"],
+      enum: [
+        "card",
+        "payOnDelivery",
+        "cash",
+        "bank-transfer",
+        "on-credit",
+        "pos",
+        "wallet",
+        "ussd",
+      ],
     },
     status: {
       type: String,
@@ -144,7 +153,7 @@ const transactionSchema = new mongoose.Schema(
     deliveryStatus: {
       type: String,
       default: "pending",
-      enum: ["pending", "on-transit", "delivered", "returned"],
+      enum: ["pending", "ready-for-delivery", "ready-for-picked-up"],
     },
     deliveryMode: {
       type: String,
@@ -167,6 +176,19 @@ const transactionSchema = new mongoose.Schema(
       type: String,
       default: "online",
       enum: ["online", "pos", "affiliate"],
+    },
+
+    reasonForRejection: {
+      type: String,
+    },
+
+    dateRejected: {
+      type: Date,
+      default: Date.now,
+    },
+    rejectedBy: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
     },
   },
   {
