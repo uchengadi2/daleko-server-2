@@ -7,9 +7,6 @@ const inventorySchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Product",
     },
-    variant: {
-      type: String,
-    },
 
     location: {
       type: mongoose.Schema.ObjectId,
@@ -19,11 +16,11 @@ const inventorySchema = new mongoose.Schema(
     batchNumber: {
       type: String,
     },
-    vendor: {
+    supplier: {
       type: mongoose.Schema.ObjectId,
-      ref: "Vendor",
+      ref: "Supplier",
     },
-    totalQuantity: {
+    quantity: {
       type: Number,
     },
     remainingQuantity: {
@@ -32,32 +29,26 @@ const inventorySchema = new mongoose.Schema(
     unit: {
       type: String,
     },
-    // pricePerUnit: {
-    //   type: Number,
-    // },
-
-    // minQuantity: {
-    //   type: Number,
-    //   default: 1,
-    // },
-    isOnPromo: {
-      type: String,
-      default: "no",
-      enum: ["no", "yes"],
-    },
-    // promoPrice: {
-    //   type: Number,
-    // },
-    totalCost: {
+    currentProductPricePerUnit: {
       type: Number,
     },
+
+    thisPriceLabel: {
+      type: String,
+    },
+
     sku: {
       type: String,
     },
     barcode: {
       type: String,
     },
-
+    slug: {
+      type: String,
+    },
+    configuration: {
+      type: String,
+    },
     costPerUnit: {
       type: Number,
     },
@@ -67,59 +58,21 @@ const inventorySchema = new mongoose.Schema(
       ref: "Location",
     },
 
-    hasSizeVariant: { type: Boolean, default: false, enum: [false, true] },
-    hasColourVariant: {
-      type: Boolean,
-      default: false,
-      enum: [false, true],
-    },
-    hasMaterialVariant: {
-      type: Boolean,
-      default: false,
-      enum: [false, true],
-    },
-    hasStyleVariant: { type: Boolean, default: false, enum: [false, true] },
-
-    size: {
-      type: String,
-    },
-    color: {
-      type: String,
-    },
-    material: {
-      type: String,
-    },
-    style: {
-      type: String,
-    },
-    weightInKg: {
+    weightPerUnit: {
       type: Number,
     },
-    imageCover: {
-      type: String,
-    },
-    images: [
-      {
-        type: String,
-      },
-    ],
 
+    dateWhenFirstItemWasOffBoarded: {
+      type: Date,
+    },
+    dateWhenLastItemWasOffBoarded: {
+      type: Date,
+    },
     dateOnBoarded: {
       type: Date,
-    },
-    dateOfFirstItemSold: {
-      type: Date,
       default: Date.now,
     },
-    dateOfLastItemSold: {
-      type: Date,
-      default: Date.now,
-    },
-    dateCreated: {
-      type: Date,
-      default: Date.now,
-    },
-    createdBy: [
+    onBoardedBy: [
       {
         type: mongoose.Schema.ObjectId,
         ref: "User",
@@ -129,6 +82,9 @@ const inventorySchema = new mongoose.Schema(
       type: String,
       default: "in-stock",
       enum: ["empty", "in-stock"],
+    },
+    comment: {
+      type: String,
     },
   },
   {
@@ -145,6 +101,12 @@ inventorySchema.pre(/^find/, function (next) {
 
   this.populate({
     path: "product",
+  });
+  this.populate({
+    path: "supplier",
+  });
+  this.populate({
+    path: "source",
   });
 
   next();
