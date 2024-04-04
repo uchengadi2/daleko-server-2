@@ -129,7 +129,7 @@ const productSchema = new mongoose.Schema(
     salesPreference: {
       type: String,
       default: "retail",
-      enum: ["retail", "wholesale", "derica", "paint", "community"],
+      enum: ["retail", "wholesale", "derica", "paint", "community", "deal"],
     },
 
     allowSubscription: {
@@ -211,6 +211,32 @@ const productSchema = new mongoose.Schema(
     },
     datePriceWasSet: {
       type: Date,
+    },
+    requiredMaximumNumberOfCommunityMembers: {
+      type: Number,
+      default: 0,
+    },
+    communityTotalPurchaseableUnit: {
+      type: Number,
+      default: 0,
+    },
+
+    communityDeliveryPeriod: {
+      type: String,
+    },
+    communityDeliveryType: {
+      type: String,
+      default: "same-location",
+      enum: ["same-locatiion", "diverse-location", "hybrid"],
+    },
+    communityInstruction: {
+      type: String,
+    },
+    dealCode: {
+      type: String,
+    },
+    dealExpiryDate: {
+      type: String,
     },
   },
   {
