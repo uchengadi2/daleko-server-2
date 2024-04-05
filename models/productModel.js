@@ -103,7 +103,7 @@ const productSchema = new mongoose.Schema(
     stockStatus: {
       type: String,
       default: "in-stock",
-      enum: ["in-stock", "out-of-stock"],
+      enum: ["in-stock", "out-of-stock", "sold-out"],
     },
 
     countryOfOrigin: {
