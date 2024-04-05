@@ -63,6 +63,7 @@ const proposedDealSchema = new mongoose.Schema(
 
     status: {
       type: String,
+      default: "pending",
       enum: ["pending", "treated", "expired"],
     },
 

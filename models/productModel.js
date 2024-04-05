@@ -238,6 +238,11 @@ const productSchema = new mongoose.Schema(
     dealExpiryDate: {
       type: String,
     },
+    dealType: {
+      type: String,
+      default: "public",
+      enum: ["public", "private"],
+    },
   },
   {
     toJSON: { virtuals: true },
