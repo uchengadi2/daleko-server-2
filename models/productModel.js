@@ -243,6 +243,24 @@ const productSchema = new mongoose.Schema(
       default: "public",
       enum: ["public", "private"],
     },
+    showDealPricePerUnit: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    allowDealQuantityChange: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    dealStatus: {
+      type: String,
+      default: "inactive",
+      enum: ["inactive", "active"],
+    },
+    dealComment: {
+      type: String,
+    },
   },
   {
     toJSON: { virtuals: true },
