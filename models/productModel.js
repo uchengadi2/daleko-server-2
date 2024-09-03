@@ -67,12 +67,13 @@ const productSchema = new mongoose.Schema(
     priceLabel: {
       type: String,
     },
+
     weightPerUnit: {
       type: Number,
     },
-    unit: {
-      type: String,
-    },
+    // unit: {
+    //   type: String,
+    // },
 
     createdAt: {
       type: Date,
@@ -99,6 +100,15 @@ const productSchema = new mongoose.Schema(
       type: String,
       default: "yes",
       enum: ["yes", "no"],
+    },
+    productType: {
+      type: String,
+      default: "single-product",
+      enum: [
+        "single-product",
+        "multiple-but-same-product",
+        "multiple-but-different-products",
+      ],
     },
     stockStatus: {
       type: String,
@@ -208,9 +218,11 @@ const productSchema = new mongoose.Schema(
     },
     minimumFreezableQuantity: {
       type: Number,
+      default: 1,
     },
     datePriceWasSet: {
       type: Date,
+      default: null,
     },
     requiredMaximumNumberOfCommunityMembers: {
       type: Number,
@@ -223,20 +235,24 @@ const productSchema = new mongoose.Schema(
 
     communityDeliveryPeriod: {
       type: String,
+      default: null,
     },
-    communityDeliveryType: {
-      type: String,
-      default: "same-location",
-      enum: ["same-locatiion", "diverse-location", "hybrid"],
-    },
+    // communityDeliveryType: {
+    //   type: String,
+    //   default: "same-location",
+    //   enum: ["same-location", "diverse-location", "hybrid"],
+    // },
     communityInstruction: {
       type: String,
+      default: null,
     },
     dealCode: {
       type: String,
+      default: null,
     },
     dealExpiryDate: {
       type: String,
+      default: null,
     },
     dealType: {
       type: String,
@@ -260,6 +276,112 @@ const productSchema = new mongoose.Schema(
     },
     dealComment: {
       type: String,
+      default: null,
+    },
+    dealDeliveryMode: {
+      type: String,
+      default: "centralized-at-no-cost",
+      enum: [
+        "centralized-at-no-cost",
+        "centralized-at-agreed-cost",
+        "decentralized-at-no-cost",
+        "decentralized-at-agreed-cost",
+        "managed-by-each-beneficiary",
+      ],
+    },
+    dealCentralizedDeliveryLocation: {
+      type: String,
+      default: null,
+    },
+    dealCentralizedAgreedDeliveryCost: {
+      type: Number,
+      default: 0,
+    },
+    dealDecentralizedDeliveryLocation: [
+      {
+        type: String,
+        default: null,
+      },
+    ],
+    dealDecentralizedAgreedDeliveryCost: {
+      type: Number,
+      default: 0,
+    },
+    showDealDeliveryCost: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    dealPaymentPreference: {
+      type: String,
+      default: "each-beneficiary-make-own-payment",
+      enum: [
+        "each-beneficiary-make-own-payment",
+        "beneficiaries-make-collective-payment",
+        "payment-settled-by-an-entity",
+        "no-payment-is-required",
+      ],
+    },
+    showDealPaymentDetails: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    requestDealRedemptionCode: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    isAContributoryDeal: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+
+    dealOwnerEntity: {
+      type: mongoose.Schema.ObjectId,
+      ref: "State",
+    },
+
+    dealOwner: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Community",
+    },
+
+    dealInitialPercentageContribution: {
+      type: Number,
+      default: 0,
+    },
+    dealMaximumInstallmentAllowed: {
+      type: Number,
+      default: 1,
+    },
+    includeGatewayChargesInPrice: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    gatewayFixedCharge: {
+      type: Number,
+      default: 0,
+    },
+    gatewayRateCharge: {
+      type: Number,
+      default: 0,
+    },
+    isACreditDeal: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    preferredEntityVariant: {
+      type: String,
+      default: "not-applicable",
+      enum: ["not-applicable", "entity", "community"],
+    },
+    dealSlug: {
+      type: String,
+      default: null,
     },
   },
   {

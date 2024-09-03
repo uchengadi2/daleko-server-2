@@ -59,6 +59,9 @@ const rejectsRoute = require("./routes/rejectsRoute");
 const packagingRoute = require("./routes/packagingRoute");
 const communitySalesRoute = require("./routes/communitySalesRoute");
 const proposedDealRoute = require("./routes/proposedDealRoute");
+const communityRoute = require("./routes/communityRoute");
+const targetSchemeRoute = require("./routes/targetSchemeRoute");
+const targetContributionRoute = require("./routes/targetContributionsRoute");
 
 const app = express();
 
@@ -173,8 +176,11 @@ app.use("/api/v1/quotes", quoteRoute);
 app.use("/api/v1/freezes", freezePriceRoute);
 app.use("/api/v1/rejects", rejectsRoute);
 app.use("/api/v1/packagings", packagingRoute);
-app.use("/api/v1/communities", communitySalesRoute);
+app.use("/api/v1/communitySales", communitySalesRoute);
 app.use("/api/v1/deals", proposedDealRoute);
+app.use("/api/v1/communities", communityRoute);
+app.use("/api/v1/targets", targetSchemeRoute);
+app.use("/api/v1/contributions", targetContributionRoute);
 
 //tackling unhandled routes
 app.all("*", (req, res, next) => {

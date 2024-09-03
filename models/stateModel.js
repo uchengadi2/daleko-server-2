@@ -51,6 +51,25 @@ const stateSchema = new mongoose.Schema(
     salesTaxRate: {
       type: Number,
     },
+    entityType: {
+      type: String,
+      default: "conventional",
+      enum: ["conventional", "organizational"],
+    },
+    entityDealCode: {
+      type: String,
+      default: null,
+    },
+    allowCreditDeal: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    allowPaymentOnDelivery: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
   },
   {
     toJSON: { virtuals: true },

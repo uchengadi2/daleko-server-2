@@ -193,6 +193,123 @@ const orderSchema = new mongoose.Schema(
       default: "pending",
       enum: ["pending", "ready", "not-ready"],
     },
+
+    dealCode: {
+      type: String,
+      default: null,
+    },
+
+    dealType: {
+      type: String,
+      default: "public",
+      enum: ["public", "private"],
+    },
+
+    dealStatus: {
+      type: String,
+      default: "inactive",
+      enum: ["inactive", "active"],
+    },
+
+    dealDeliveryMode: {
+      type: String,
+      default: "centralized-at-no-cost",
+      enum: [
+        "centralized-at-no-cost",
+        "centralized-at-agreed-cost",
+        "decentralized-at-no-cost",
+        "decentralized-at-agreed-cost",
+        "managed-by-each-beneficiary",
+      ],
+    },
+    dealCentralizedDeliveryLocation: {
+      type: String,
+      default: null,
+    },
+    dealCentralizedAgreedDeliveryCost: {
+      type: Number,
+      default: 0,
+    },
+    dealDecentralizedDeliveryLocation: {
+      type: String,
+      default: null,
+    },
+    dealDecentralizedAgreedDeliveryCost: {
+      type: Number,
+      default: 0,
+    },
+    showDealDeliveryCost: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+
+    salesPreference: {
+      type: String,
+      default: "retail",
+      enum: ["retail", "wholesale", "derica", "paint", "community", "deal"],
+    },
+    dealPaymentPreference: {
+      type: String,
+      default: "each-beneficiary-make-own-payment",
+      enum: [
+        "each-beneficiary-make-own-payment",
+        "beneficiaries-make-collective-payment",
+        "payment-settled-by-an-entity",
+        "no-payment-is-required",
+      ],
+    },
+    showDealPaymentDetails: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+
+    dealRedemptionCode: {
+      type: String,
+    },
+    requestDealRedemptionCode: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    isAContributoryDeal: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    dealOwner: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Community",
+    },
+    dealOwnerEntity: {
+      type: mongoose.Schema.ObjectId,
+      ref: "State",
+    },
+    dealInitialPercentageContribution: {
+      type: Number,
+      default: 0,
+    },
+    dealMaximumInstallmentAllowed: {
+      type: Number,
+      default: 1,
+    },
+    includeGatewayChargesInPrice: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
+    gatewayFixedCharge: {
+      type: Number,
+    },
+    gatewayRateCharge: {
+      type: Number,
+    },
+    isACreditDeal: {
+      type: Boolean,
+      default: false,
+      enum: [false, true],
+    },
   },
   {
     toJSON: { virtuals: true },
